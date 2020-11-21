@@ -11,7 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EasyPark">
-        <activity android:name=".UserProfile"></activity>
+        <activity android:name=".userprofile.PaymentMethodInfo"></activity>
+        <activity android:name=".userprofile.PaymentInfo" />
+        <activity android:name=".userprofile.ReservationList" />
+        <activity android:name=".userprofile.Home" />
+        <activity android:name=".userprofile.DriverProfile" />
         <activity android:name=".RegisterPage" />
         <activity android:name=".Login">
             <intent-filter>
