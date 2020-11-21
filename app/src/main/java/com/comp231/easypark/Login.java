@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.comp231.easypark.userprofile.Home;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -21,6 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class Login extends AppCompatActivity {
     public static final String TAG = "TAG";
+    public static FirebaseUser user;
     private EditText loginPageEmail, loginPagePassword;
     private Button loginPage_registerBtn,loginPage_loginBtn;
     ProgressBar progressBar;
@@ -69,16 +71,15 @@ public class Login extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if(task.isSuccessful()){
                                         Log.d(TAG, "signInWithEmail:success");
-                                        FirebaseUser user = fAuth.getCurrentUser();
+                                        user = fAuth.getCurrentUser();
 
                                         String uid = user.getUid();
                                         System.out.println(uid);
-
                                         Log.d("User Iddsdddd: ",uid);
 
 //                                updateUI(user);
                                         Toast.makeText(Login.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                                        startActivity(new Intent(getApplicationContext(), Home.class));
                                     }else {
                                         Toast.makeText(Login.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                         progressBar.setVisibility(View.GONE);
