@@ -69,19 +69,19 @@ public class PaymentMethodInfo extends AppCompatActivity {
 
         if (cardNumber.getText().toString().length() != 16)
         {
-            Toast.makeText(this, "Please, enter a valid card number", Toast.LENGTH_LONG).show();
+            cardNumber.setError("Please, enter a valid card number");
             return;
         }
 
         if (holderName.getText().toString().length() < 1)
         {
-            Toast.makeText(this, "Please, enter the holder name", Toast.LENGTH_LONG).show();
+            holderName.setError("Please, enter the holder name");
             return;
         }
 
         if (expirationDate.getText().toString().length() != 4)
         {
-            Toast.makeText(this, "Please, enter a valid expiration date", Toast.LENGTH_LONG).show();
+            expirationDate.setError("Please, enter a valid expiration date");
             return;
         }
 
