@@ -2,14 +2,17 @@ package com.comp231.easypark;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
@@ -44,6 +47,7 @@ public class CompleteReservation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complete_reservation);
         reservation = new Reservation();
+        cost = 0;
 
 
         showUserId = (TextView) findViewById(R.id.textViewUserId);
@@ -58,6 +62,7 @@ public class CompleteReservation extends AppCompatActivity {
         showUserId.setText(userId);
         showParkingLotId.setText(SeeReservation.newReservation.getParkingLotID());
         showParkingSpotId.setText(String.valueOf(SeeReservation.newReservation.getAvailableParkingSpot()));
+        showCost.setText(SeeReservation.newReservation.getParkingCost());
         String costType = showCost.getText().toString();
         switch (costType){
             case "12hour - $20":
@@ -73,7 +78,7 @@ public class CompleteReservation extends AppCompatActivity {
                 cost = 12;
                 break;
         }
-        showCost.setText(SeeReservation.newReservation.getParkingCost());
+
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss z");
         String currentDateandTime = sdf.format(new Date());
         showReservationTime.setText(currentDateandTime);
@@ -81,7 +86,7 @@ public class CompleteReservation extends AppCompatActivity {
 
     }
 
-    public void insertReservation()
+    public void insertReservation(View view)
     {
         //DocumentReference docRef =  db.collection("ReservationDemo").document();
         //Log.d(TAG, "docId: " + resDocRef.getId());
@@ -89,11 +94,17 @@ public class CompleteReservation extends AppCompatActivity {
         //Reservation r = new Reservation();
         reservation.setCost(cost);
         reservation.setParkingLotId(parkingLotId);
-        reservation.setParkingSpotId(Long.parseLong(showParkingSpotId.toString()));
+        reservation.setParkingSpotId(SeeReservation.newReservation.getAvailableParkingSpot());
         reservation.setReserveTime(Timestamp.now());
         reservation.setUserId(userId);
         Task insert = resDocRef.set(reservation);
         insert.addOnSuccessListener(o -> {
+            Context context = getApplicationContext();
+            CharSequence text = "Success!";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
             //Log.d(TAG, "YAY! dummy added");
             //endTime = SystemClock.uptimeMillis() + DURATION;
             //timerHandler.postDelayed(timerRun, 0);
