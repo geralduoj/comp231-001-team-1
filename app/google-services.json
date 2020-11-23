@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "847003649417",
+    "firebase_url": "https://duc-auth-afce9.firebaseio.com",
+    "project_id": "duc-auth-afce9",
+    "storage_bucket": "duc-auth-afce9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:847003649417:android:fe5be54fed71fa2cfa4d58",
+        "android_client_info": {
+          "package_name": "com.comp231.easypark"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "847003649417-h909pjfj0jlfkn6df0ucvsc41epjg8ua.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpn91z2cJz5DfGEnoj3B17d7j5mAYe_lg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "847003649417-h909pjfj0jlfkn6df0ucvsc41epjg8ua.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
