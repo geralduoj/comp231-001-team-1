@@ -3,17 +3,17 @@ package com.comp231.easypark;
 import com.google.firebase.Timestamp;
 
 public class Reservation {
-    private String reserveTime;
+    private Timestamp reserveTime;
     private String parkingLotId;
     private long parkingSpotId;
     private String userId;
     private long cost;
 
-    public String getReserveTime() {
+    public Timestamp getReserveTime() {
         return reserveTime;
     }
 
-    public void setReserveTime(String reserveTime) {
+    public void setReserveTime(Timestamp reserveTime) {
         this.reserveTime = reserveTime;
     }
 
