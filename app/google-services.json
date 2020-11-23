@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "963998939400",
+    "firebase_url": "https://iris-reservation.firebaseio.com",
+    "project_id": "iris-reservation",
+    "storage_bucket": "iris-reservation.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:963998939400:android:7be7dd9e9c1307ddf454bd",
+        "android_client_info": {
+          "package_name": "com.comp231.easypark"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "963998939400-j2hniudtla204h12ofhmc2prjfefsv7n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBiC6L59cl_BMt7M-tW4D6d9OICYYtJ7oo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "963998939400-j2hniudtla204h12ofhmc2prjfefsv7n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:963998939400:android:c9b95281ecf51b39f454bd",
+        "android_client_info": {
+          "package_name": "com.example.parkingreservationiris"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "963998939400-j2hniudtla204h12ofhmc2prjfefsv7n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBiC6L59cl_BMt7M-tW4D6d9OICYYtJ7oo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "963998939400-j2hniudtla204h12ofhmc2prjfefsv7n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:963998939400:android:ad46ae969f698281f454bd",
+        "android_client_info": {
+          "package_name": "com.example.paymentsummary_page"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "963998939400-j2hniudtla204h12ofhmc2prjfefsv7n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBiC6L59cl_BMt7M-tW4D6d9OICYYtJ7oo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "963998939400-j2hniudtla204h12ofhmc2prjfefsv7n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
