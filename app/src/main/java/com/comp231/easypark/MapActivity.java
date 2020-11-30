@@ -1,17 +1,30 @@
 package com.comp231.easypark;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.IntentSender;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Looper;
 import android.util.Log;
 import android.widget.Button;
 
 import com.comp231.easypark.map.ParkingLot;
+import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResponse;
+import com.google.android.gms.location.SettingsClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -20,6 +33,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.GeoPoint;
@@ -50,6 +64,22 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private FusedLocationProviderClient locationClient;
     private Location myLoc;
     private MarkerOptions filterMarkerOptions;
+    // iter 2
+    private LocationRequest locationRequest;
+    private LocationCallback locationCallback = new LocationCallback(){
+        @Override
+        public void onLocationResult(LocationResult locationResult) {
+            if(locationResult != null){
+                for(Location location : locationResult.getLocations()){
+                    myLoc = location;
+                    zoomToMyLoc();
+                    getAllParkingLotsFromDb();
+                    showAllParkingLotsOnMap();
+                    Log.d(TAG, "location update: " + location.toString());
+                }
+            }
+        }
+    };
 
     private FirebaseFirestore db;
     private List<ParkingLot> parkingLotList;
@@ -59,13 +89,79 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+        if(ContextCompat.checkSelfPermission(MapActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(MapActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)!=PackageManager.PERMISSION_GRANTED){
 
-        locationClient = LocationServices.getFusedLocationProviderClient(this);
-        db = FirebaseFirestore.getInstance();
-        parkingLotList = new ArrayList<>();
-        getAllParkingLotsFromDb();
-        initMapComponent();
-        initControlComponent();
+            ActivityCompat.requestPermissions(MapActivity.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            System.exit(1);
+        }else{
+            locationClient = LocationServices.getFusedLocationProviderClient(this);
+            initLocRequest();
+            db = FirebaseFirestore.getInstance();
+            parkingLotList = new ArrayList<>();
+            getAllParkingLotsFromDb();
+            initMapComponent();
+            initControlComponent();
+        }
+    }
+
+    // iter 2
+    private void initLocRequest(){
+        locationRequest = LocationRequest.create();
+        locationRequest.setInterval(15000);
+        locationRequest.setFastestInterval(5000);
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+    }
+
+    // iter 2
+    @Override
+    protected void onStart() {
+        super.onStart();
+        startLocationUpdate();
+    }
+    // iter 2
+    @Override
+    protected void onStop() {
+        super.onStop();
+        stopLocationUpdate();
+    }
+    // iter 2
+    private void startLocationUpdate(){
+        LocationSettingsRequest request = new LocationSettingsRequest.Builder()
+                .addLocationRequest(locationRequest).build();
+        SettingsClient settingsClient = LocationServices.getSettingsClient(this);
+        Task<LocationSettingsResponse> responseTask = settingsClient.checkLocationSettings(request);
+        responseTask.addOnSuccessListener(locationSettingsResponse -> {
+            try{
+                locationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
+            }catch (SecurityException e){
+                Log.d(TAG, "Security Permission Exception: " + e.getMessage());
+            }
+
+        });
+        responseTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                if(e instanceof ResolvableApiException){
+                    ResolvableApiException exception = (ResolvableApiException) e;
+                    try {
+                        exception.startResolutionForResult(MapActivity.this, 1234);
+                    } catch (IntentSender.SendIntentException sendIntentException) {
+                        Log.e(TAG, "Location Solution Not Found");
+                        sendIntentException.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
+    // iter 2
+    private void stopLocationUpdate(){
+        locationClient.removeLocationUpdates(locationCallback);
+    }
+    // iter 2
+    private void zoomToMyLoc(){
+        if(gMap != null)
+            gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(myLoc.getLatitude(), myLoc.getLongitude()), INIT_ZOOM));
     }
 
     @Override
@@ -85,8 +181,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         btnNearestLot = findViewById(R.id.btnNearestLot);
         btnNearestLot.setOnClickListener(v->{
-            myLoc = gMap.getMyLocation();
             getAllParkingLotsFromDb();
+            gMap.clear();
             Map<ParkingLot, Double> distances = new HashMap<>();
             for(ParkingLot p : parkingLotList){
                 GeoPoint geoPoint = p.getLocation();
@@ -95,6 +191,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 );
                 distances.put(p, distance);
             }
+
             ParkingLot nearest = Collections.min(distances.entrySet(), Map.Entry.comparingByValue()).getKey();
             Log.d(TAG,"get min: " + nearest.getName());
             setFilterMarkerOptions(nearest, String.format("Available/Total: %s/%s", nearest.getAvailableNumOfSpots(), nearest.getTotalNumOfSpots()));
