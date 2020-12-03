@@ -75,11 +75,9 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="Expiration Date"
+        android:hint="MM/DD"
         android:inputType="date"
-        android:maxLength="4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        android:maxLength="5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardNumberText" />
 
@@ -92,5 +90,13 @@
         android:text="Save"
         app:layout_constraintStart_toStartOf="@+id/expirationDate"
         app:layout_constraintTop_toBottomOf="@+id/expirationDate" />
+
+    <CheckBox
+        android:id="@+id/defaultMethod"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Default Payment Method"
+        app:layout_constraintEnd_toEndOf="@+id/cardNumberText"
+        app:layout_constraintTop_toTopOf="@+id/expirationDate" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

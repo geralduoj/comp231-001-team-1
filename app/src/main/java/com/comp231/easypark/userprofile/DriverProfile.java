@@ -96,9 +96,6 @@ public class DriverProfile extends AppCompatActivity {
             uid = user.getUid();
         }
 
-
-
-
         userDocRef = db.collection("Users").document(uid);
         userDocRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override

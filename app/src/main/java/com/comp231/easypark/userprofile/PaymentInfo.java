@@ -46,6 +46,7 @@ public class PaymentInfo extends AppCompatActivity  implements PaymentMethodAdap
     protected void onRestart() {
         super.onRestart();
         methodsList.clear();
+        paymentMethodAdapter.notifyDataSetChanged();
         initList();
     }
 
@@ -65,7 +66,7 @@ public class PaymentInfo extends AppCompatActivity  implements PaymentMethodAdap
                         for (DocumentSnapshot doc : documentSnapshots)
                         {
                             PaymentMethod method = new PaymentMethod( doc.getId(), doc.getString("type"),
-                                    doc.getString("cardNumber"), doc.getString("holderName"), doc.getString("expirationDate"));
+                                    doc.getString("cardNumber"), doc.getString("holderName"), doc.getString("expirationDate"), doc.getBoolean("default") );
                             methodsList.add(method);
                         }
                     }
