@@ -16,7 +16,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.comp231.easypark.R;
+import com.comp231.easypark.RegisterPage;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -85,7 +85,7 @@ public class Login extends AppCompatActivity {
                                         Log.d("User Iddsdddd: ",uid);
 
 //                                updateUI(user)
-                                        startActivity(new Intent(getApplicationContext(),PhoneNumberPage.class));
+                                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
                                     }else {
                                         Toast.makeText(Login.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                         progressBar.setVisibility(View.GONE);
@@ -132,7 +132,7 @@ public class Login extends AppCompatActivity {
                     }
                 });
 
-                passwordResetDialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                passwordResetDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // close the dialog
