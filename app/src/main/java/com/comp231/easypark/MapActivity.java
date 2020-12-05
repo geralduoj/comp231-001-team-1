@@ -13,7 +13,11 @@ import android.location.Location;
 import android.os.Bundle;
 import android.os.Looper;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.comp231.easypark.map.ParkingLot;
 import com.google.android.gms.common.api.ResolvableApiException;
@@ -49,11 +53,6 @@ import java.util.Map;
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-    private Button btnNearestLot;
-    private Button btnLow1HrFare;
-    private Button btnLow6HrFare;
-    private Button btnLow12HrFare;
-    private Button btnLow24HrFare;
     private Button btnToggleTraffic;
     private SupportMapFragment mapFragment;
 
@@ -75,6 +74,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     zoomToMyLoc();
                     getAllParkingLotsFromDb();
                     showAllParkingLotsOnMap();
+                    Toast.makeText(MapActivity.this, "Map Synced", Toast.LENGTH_SHORT).show();
                     Log.d(TAG, "location update: " + location.toString());
                 }
             }
@@ -102,6 +102,36 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             getAllParkingLotsFromDb();
             initMapComponent();
             initControlComponent();
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.map_menu, menu );
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.nearestParkingLot:
+                findNearestLot();
+                return true;
+            case R.id.oneHour:
+                findLow1HrFare();
+                return true;
+            case R.id.sixHour:
+                findLow6HrFare();
+                return true;
+            case R.id.twelveHour:
+                findLow12HrFare();
+                return true;
+            case R.id.twentyfourHour:
+                findLow24HrFare();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 
@@ -177,45 +207,40 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
     }
 
+    private void findNearestLot(){
+        getAllParkingLotsFromDb();
+        gMap.clear();
+        Map<ParkingLot, Double> distances = new HashMap<>();
+        for(ParkingLot p : parkingLotList){
+            GeoPoint geoPoint = p.getLocation();
+            double distance = Math.sqrt(
+                    Math.pow(geoPoint.getLatitude() - myLoc.getLatitude(), 2) + Math.pow(geoPoint.getLongitude() - myLoc.getLongitude(), 2)
+            );
+            distances.put(p, distance);
+        }
+
+        ParkingLot nearest = Collections.min(distances.entrySet(), Map.Entry.comparingByValue()).getKey();
+        Log.d(TAG,"get min: " + nearest.getName());
+        setFilterMarkerOptions(nearest, String.format("Available/Total: %s/%s", nearest.getAvailableNumOfSpots(), nearest.getTotalNumOfSpots()));
+    }
+
+    private void findLow1HrFare(){
+        setPriceFilterOptions("1hour", "Hour");
+    }
+
+    private void findLow6HrFare(){
+        setPriceFilterOptions("6hour", "6 Hours");
+    }
+
+    private void findLow12HrFare(){
+        setPriceFilterOptions("12hour", "12 Hours");
+    }
+
+    private void findLow24HrFare(){
+        setPriceFilterOptions("24hour", "24 Hours");
+    }
+
     private void initControlComponent(){
-
-        btnNearestLot = findViewById(R.id.btnNearestLot);
-        btnNearestLot.setOnClickListener(v->{
-            getAllParkingLotsFromDb();
-            gMap.clear();
-            Map<ParkingLot, Double> distances = new HashMap<>();
-            for(ParkingLot p : parkingLotList){
-                GeoPoint geoPoint = p.getLocation();
-                double distance = Math.sqrt(
-                        Math.pow(geoPoint.getLatitude() - myLoc.getLatitude(), 2) + Math.pow(geoPoint.getLongitude() - myLoc.getLongitude(), 2)
-                );
-                distances.put(p, distance);
-            }
-
-            ParkingLot nearest = Collections.min(distances.entrySet(), Map.Entry.comparingByValue()).getKey();
-            Log.d(TAG,"get min: " + nearest.getName());
-            setFilterMarkerOptions(nearest, String.format("Available/Total: %s/%s", nearest.getAvailableNumOfSpots(), nearest.getTotalNumOfSpots()));
-        });
-
-        btnLow1HrFare = findViewById(R.id.btnLow1HrFare);
-        btnLow1HrFare.setOnClickListener(v->{
-            setPriceFilterOptions("1hour", "Hour");
-        });
-
-        btnLow6HrFare = findViewById(R.id.btnLow6HrFare);
-        btnLow6HrFare.setOnClickListener(v->{
-            setPriceFilterOptions("6hour", "6 Hours");
-        });
-
-        btnLow12HrFare = findViewById(R.id.btnLow12HrFare);
-        btnLow12HrFare.setOnClickListener(v->{
-            setPriceFilterOptions("12hour", "12 Hours");
-        });
-
-        btnLow24HrFare = findViewById(R.id.btnLow24HrFare);
-        btnLow24HrFare.setOnClickListener(v->{
-            setPriceFilterOptions("24hour", "24 Hours");
-        });
 
         btnToggleTraffic = findViewById(R.id.btnToggleTraffic);
         btnToggleTraffic.setOnClickListener(v->{
