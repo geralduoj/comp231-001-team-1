@@ -1,9 +1,12 @@
 package com.comp231.easypark.userprofile;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -25,12 +28,14 @@ public class PaymentMethodAdapter extends RecyclerView.Adapter<PaymentMethodAdap
 
         public TextView type;
         public TextView cardEnding;
+        public TextView defaultMethodText;
         OnCardListener onCardListener;
 
         public MyViewHolder (View itemView, OnCardListener onCardListener){
             super(itemView);
             type = itemView.findViewById(R.id.paymentType);
             cardEnding = itemView.findViewById(R.id.cardEnd);
+            defaultMethodText = itemView.findViewById(R.id.defaultText);
             this.onCardListener = onCardListener;
             itemView.setOnClickListener(this);
 
@@ -68,6 +73,7 @@ public class PaymentMethodAdapter extends RecyclerView.Adapter<PaymentMethodAdap
         // replace the contents of the layout_listitem view with elements from data set
         holder.type.setText(methodList.get(position).type);
         holder.cardEnding.setText("Ending: " + methodList.get(position).cardNumber.substring(12));
+        holder.defaultMethodText.setText(methodList.get(position).isDefault ? context.getResources().getString(R.string.defaultMethod) : "");
     }
 
     @Override

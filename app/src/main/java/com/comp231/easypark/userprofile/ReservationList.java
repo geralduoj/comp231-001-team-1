@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.comp231.easypark.OptionsMenuActivity;
 import com.comp231.easypark.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -18,9 +19,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.comp231.easypark.userprofile.DriverProfile.userDocRef;
+import static com.comp231.easypark.Login.userDocRef;
 
-public class ReservationList extends AppCompatActivity {
+public class ReservationList extends OptionsMenuActivity {
 
     private ReservationListAdapter listAdapter;
 
@@ -59,7 +60,7 @@ public class ReservationList extends AppCompatActivity {
                         {
                             Reservation reservation = new Reservation( doc.getTimestamp("reserveTime"),
                                     doc.getString("parkingLotId"),
-                                    doc.getString("userId"), doc.getString("parkingSpotId"),(double) doc.get("cost"));
+                                    doc.getString("userId"), doc.getString("parkingSpotId"),(long) doc.get("cost"));
                             reservationList.add(reservation);
                         }
                     }
