@@ -9,10 +9,12 @@ import android.view.View;
 import com.comp231.easypark.AutoCancellationActivity;
 import com.comp231.easypark.Login;
 import com.comp231.easypark.MapActivity;
+import com.comp231.easypark.OptionsMenuActivity;
 import com.comp231.easypark.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 
-public class Home extends AppCompatActivity {
+public class Home extends OptionsMenuActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +23,7 @@ public class Home extends AppCompatActivity {
     }
 
     public void goToProfile(View view) {
-        startActivity(new Intent(getApplicationContext(), DriverProfile.class));
+        startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
 
     }
 

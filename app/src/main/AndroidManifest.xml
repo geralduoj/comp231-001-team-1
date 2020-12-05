@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EasyPark">
-        <activity android:name=".MapPassActivity"></activity>
+        <activity android:name=".userprofile.EditProfileActivity"/>
+        <activity android:name=".MapPassActivity" />
         <activity android:name=".MapActivity" />
         <activity android:name=".AutoCancellationActivity" />
         <activity android:name=".userprofile.PaymentMethodInfo" />
@@ -24,6 +25,7 @@
         <activity android:name=".userprofile.ReservationList" />
         <activity android:name=".userprofile.Home" />
         <activity android:name=".userprofile.DriverProfile" />
+        <activity android:name=".userprofile.ProfileActivity" />
         <activity android:name=".RegisterPage" />
 
         <meta-data

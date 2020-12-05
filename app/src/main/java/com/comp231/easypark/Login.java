@@ -19,6 +19,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Login extends AppCompatActivity {
     public static final String TAG = "TAG";
@@ -28,6 +30,8 @@ public class Login extends AppCompatActivity {
     ProgressBar progressBar;
 
     FirebaseAuth fAuth;
+    public static DocumentReference userDocRef;
+    FirebaseFirestore db;
 
 
     @Override
@@ -43,6 +47,7 @@ public class Login extends AppCompatActivity {
         loginPage_registerBtn = findViewById(R.id.loginPage_registerBtn);
         fAuth = FirebaseAuth.getInstance();
         attachJavaObjectToXML();
+        db = FirebaseFirestore.getInstance();
 
         loginPage_loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +81,8 @@ public class Login extends AppCompatActivity {
                                         String uid = user.getUid();
                                         System.out.println(uid);
                                         Log.d("User Iddsdddd: ",uid);
+
+                                        userDocRef = db.collection("Users").document(uid);
 
 //                                updateUI(user);
                                         Toast.makeText(Login.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();

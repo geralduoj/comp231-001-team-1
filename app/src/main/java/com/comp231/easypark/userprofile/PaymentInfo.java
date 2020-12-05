@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.comp231.easypark.OptionsMenuActivity;
 import com.comp231.easypark.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -20,9 +21,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.comp231.easypark.userprofile.DriverProfile.userDocRef;
+import static com.comp231.easypark.Login.userDocRef;
 
-public class PaymentInfo extends AppCompatActivity  implements PaymentMethodAdapter.OnCardListener {
+public class PaymentInfo extends OptionsMenuActivity implements PaymentMethodAdapter.OnCardListener {
 
     private PaymentMethodAdapter paymentMethodAdapter;
 

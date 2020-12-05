@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.comp231.easypark.OptionsMenuActivity;
 import com.comp231.easypark.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -36,7 +37,7 @@ import static com.comp231.easypark.Login.user;
 
 //import static com.comp231.easypark.Login.myPreference;
 
-public class DriverProfile extends AppCompatActivity {
+public class DriverProfile extends OptionsMenuActivity {
 
     EditText firstNameEdit;
     EditText lastNameEdit;

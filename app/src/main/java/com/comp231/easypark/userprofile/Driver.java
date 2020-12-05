@@ -1,8 +1,9 @@
 package com.comp231.easypark.userprofile;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Driver {
+public class Driver implements Serializable {
 
     String firstName;
     String lastName;

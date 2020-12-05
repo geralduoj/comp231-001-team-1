@@ -14,6 +14,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.comp231.easypark.OptionsMenuActivity;
 import com.comp231.easypark.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -29,9 +30,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.comp231.easypark.userprofile.DriverProfile.userDocRef;
+import static com.comp231.easypark.Login.userDocRef;
 
-public class PaymentMethodInfo extends AppCompatActivity {
+public class PaymentMethodInfo extends OptionsMenuActivity {
 
     RadioGroup typeRadioGroup;
     RadioButton creditButton;
@@ -200,12 +201,6 @@ public class PaymentMethodInfo extends AppCompatActivity {
 
 
     }
-
-    private void changeDefaultMethod()
-    {
-
-    }
-
 
     private boolean validateExpirationDate(String s)
     {
