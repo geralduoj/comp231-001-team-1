@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.comp231.easypark.OptionsMenuActivity;
 import com.comp231.easypark.R;
+import com.comp231.easypark.payment.PaymentActivity;
 import com.comp231.easypark.userprofile.Home;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -117,7 +118,7 @@ public class ReservationActivity extends OptionsMenuActivity {
             Bundle bundle = new Bundle();
             bundle.putString("ReservationIdForPayment", reservations.getId());
             //this needs to be changed by Jyoti to PaymentActivity - for the moment I have linked to MainActivity
-            Intent intent = new Intent(getApplicationContext(), Home.class);
+            Intent intent = new Intent(getApplicationContext(), PaymentActivity.class);
             intent.putExtras(bundle);
             startActivity(intent);
         });

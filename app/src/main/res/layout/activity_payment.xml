@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
+    tools:context=".PaymentActivity">
+
+
+    <TextView
+        android:id="@+id/paymentTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="@string/payment"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/parkingLotNameLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginLeft="44dp"
+        android:layout_marginTop="68dp"
+        android:text="@string/parking_lot_name"
+        android:textColor="@color/dark_grey"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/paymentTitle" />
+
+    <TextView
+        android:id="@+id/parkingLotField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:text="@string/insert_parking_lot_name"
+        android:textColor="@color/dark_grey"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.306"
+        app:layout_constraintStart_toEndOf="@+id/parkingLotNameLabel"
+        app:layout_constraintTop_toBottomOf="@+id/paymentTitle" />
+
+    <TextView
+        android:id="@+id/spotNumberLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginLeft="44dp"
+        android:layout_marginTop="48dp"
+        android:text="@string/spot_number"
+        android:textColor="@color/dark_grey"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/parkingLotNameLabel" />
+
+    <TextView
+        android:id="@+id/spotNumberField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginLeft="48dp"
+        android:layout_marginTop="48dp"
+        android:text="@string/insert_spot_number"
+        android:textColor="@color/dark_grey"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.126"
+        app:layout_constraintStart_toEndOf="@+id/spotNumberLabel"
+        app:layout_constraintTop_toBottomOf="@+id/parkingLotField" />
+
+    <TextView
+        android:id="@+id/parkingDurationLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginLeft="44dp"
+        android:layout_marginTop="48dp"
+        android:text="@string/parking_duration"
+        android:textColor="@color/dark_grey"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spotNumberLabel" />
+
+    <TextView
+        android:id="@+id/parkingDuration"
+        android:layout_width="124dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="48dp"
+        android:text="@string/insert_parking_duration"
+        android:textColor="@color/dark_grey"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.011"
+        app:layout_constraintStart_toEndOf="@+id/parkingDurationLabel"
+        app:layout_constraintTop_toBottomOf="@+id/spotNumberField" />
+
+    <TextView
+        android:id="@+id/priceLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="60dp"
+        android:text="@string/price"
+        android:textColor="@color/dark_grey"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/payNowButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/parkingDurationLabel"
+        app:layout_constraintVertical_bias="0.211" />
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="52dp"
+        android:text="@string/parking_price_result"
+        android:textColor="@color/dark_grey"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/paymentChoice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.061"
+        app:layout_constraintStart_toEndOf="@+id/priceLabel"
+        app:layout_constraintTop_toBottomOf="@+id/parkingDuration"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/paymentChoice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:background="@color/light_grey"
+        android:text="@string/credit_card_number_ending_in_0914"
+        android:textColor="@color/dark_grey"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/payNowButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/priceLabel"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/payNowButton"
+        android:layout_width="328dp"
+        android:layout_height="75dp"
+        android:layout_marginBottom="64dp"
+        android:text="@string/pay_now"
+        android:textSize="20sp"
+        android:onClick="sendToConfirmation"
+        app:backgroundTint="#009688"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.53"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
