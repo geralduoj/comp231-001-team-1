@@ -150,6 +150,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         super.onStart();
         startLocationUpdate();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        startLocationUpdate();
+    }
+
     // iter 2
     @Override
     protected void onStop() {
