@@ -7,27 +7,54 @@
     tools:context=".RegisterPage">
 
 
+    <TextView
+        android:id="@+id/registerTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:text="@string/register"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/registerPage_username"
+        android:id="@+id/registerPage_fname"
         android:maxLength="20"
-        android:layout_marginTop="100dp"
-        android:textColor="#880A0A"
+        android:layout_marginTop="150dp"
+        android:textColor="@color/dark_grey"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         android:gravity="center|left"
         android:padding="20dp"
-        android:hint="UserName"
+        android:hint="First Name"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/registerPage_lname"
+        android:maxLength="20"
+        android:textColor="@color/dark_grey"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:gravity="center|left"
+        android:padding="20dp"
+        android:hint="Last Name"
+        android:layout_below="@id/registerPage_fname"
         />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/registerPage_email"
-        android:layout_below="@id/registerPage_username"
+        android:layout_below="@+id/registerPage_lname"
         android:maxLength="50"
-        android:layout_marginTop="20dp"
-        android:textColor="#880A0A"
+        android:textColor="@color/dark_grey"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         android:gravity="center|left"
@@ -39,9 +66,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/registerPage_password"
         android:layout_below="@id/registerPage_email"
-        android:maxLength="20"
-        android:layout_marginTop="20dp"
-        android:textColor="#880A0A"
+
+        android:textColor="@color/dark_grey"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         android:gravity="center|left"
@@ -55,8 +81,7 @@
         android:id="@+id/registerPage_confirmPassword"
         android:layout_below="@id/registerPage_password"
         android:maxLength="20"
-        android:layout_marginTop="20dp"
-        android:textColor="#880A0A"
+        android:textColor="@color/dark_grey"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         android:gravity="center|left"
@@ -66,13 +91,15 @@
         />
 
     <Button
-        android:layout_width="168dp"
-        android:layout_height="60dp"
+        android:layout_width="271dp"
+        android:layout_height="75dp"
         android:id="@+id/loginPage_registerBtn"
         android:layout_below="@id/registerPage_confirmPassword"
         android:layout_centerInParent="true"
-        android:text="Submit"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="12dp"
+        android:textSize="20sp"
+        app:backgroundTint="#009688"
+        android:text="@string/register"
         />
 
 </RelativeLayout>

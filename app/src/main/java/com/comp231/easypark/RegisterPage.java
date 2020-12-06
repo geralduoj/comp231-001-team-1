@@ -31,7 +31,7 @@ import java.util.Map;
 
 public class RegisterPage extends AppCompatActivity {
     public static final String TAG = "TAG";
-    private EditText registerPage_userName, registerPage_email,registerPage_password,registerPage_confirmPassrod;
+    private EditText registerPage_fName, registerPage_lName, registerPage_email,registerPage_password,registerPage_confirmPassrod;
     private Button registerPage_submit;
 
     // firebase variable
@@ -45,7 +45,8 @@ public class RegisterPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_page);
 
-        registerPage_userName=findViewById(R.id.registerPage_username);
+        registerPage_fName=findViewById(R.id.registerPage_fname);
+        registerPage_lName=findViewById(R.id.registerPage_lname);
         registerPage_email=findViewById(R.id.registerPage_email);
 
         registerPage_password=findViewById(R.id.registerPage_password);
@@ -73,7 +74,8 @@ public class RegisterPage extends AppCompatActivity {
             public void onClick(View v) {
                 final String email = registerPage_email.getText().toString().trim();
                 String password = registerPage_password.getText().toString().trim();
-                final String fullName = registerPage_userName.getText().toString();
+                final String fName = registerPage_fName.getText().toString();
+                final String lName = registerPage_lName.getText().toString();
                 final String confirmPassword    = registerPage_confirmPassrod.getText().toString();
 
                 if(TextUtils.isEmpty(email)){
@@ -117,9 +119,11 @@ public class RegisterPage extends AppCompatActivity {
 
                             Toast.makeText(RegisterPage.this, "User Created.", Toast.LENGTH_SHORT).show();
                             userID = fAuth.getCurrentUser().getUid();
+
                             DocumentReference documentReference = fStore.collection("Users").document(userID);
                             Map<String,Object> user = new HashMap<>();
-                            user.put("fName",fullName);
+                            user.put("fName",fName);
+                            user.put("lName",lName);
                             user.put("email",email);
                             user.put("password",password);
                             documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -133,7 +137,7 @@ public class RegisterPage extends AppCompatActivity {
                                     Log.d(TAG, "onFailure: " + e.toString());
                                 }
                             });
-                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                            startActivity(new Intent(getApplicationContext(),Login.class));
 
                         }else {
                             Toast.makeText(RegisterPage.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -143,6 +147,5 @@ public class RegisterPage extends AppCompatActivity {
                 });
             }
         });
-
     }
 }
