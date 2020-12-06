@@ -7,7 +7,6 @@ import android.os.Handler;
 import android.os.SystemClock;
 import android.util.Log;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.comp231.easypark.autocancellation.Reservation;
@@ -20,8 +19,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class AutoCancellationActivity extends AppCompatActivity {
     private Button btnArrived;
     private Button btnAddDummy;
-    private Button btnClear;
-    private EditText txtReservationId;
+    private TextView txtReservationId;
     private static final long DURATION = 10 * 1000;
     private TextView timer;
     private Handler timerHandler;
@@ -64,11 +62,6 @@ public class AutoCancellationActivity extends AppCompatActivity {
             insert.addOnFailureListener(o->{
                 Log.e(TAG, "OhO.. dummy escaped..");
             });
-        });
-
-        btnClear = findViewById(R.id.btnClear);
-        btnClear.setOnClickListener(v->{
-            txtReservationId.setText("");
         });
 
         btnArrived = findViewById(R.id.btnArrived);
