@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -29,6 +30,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import static com.comp231.easypark.Login.user;
+import com.comp231.easypark.userprofile.Reservation;
+import static com.comp231.easypark.Login.userDocRef;
 
 public class ReservationActivity extends OptionsMenuActivity {
 
@@ -42,17 +45,20 @@ public class ReservationActivity extends OptionsMenuActivity {
     private long cost;
     Reservation reservation;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private DocumentReference resDocRef = db.collection("ReservationDemo").document();
+
     String ParkingLotIdFromBooking;
     String ParkingLotNameFromBooking;
     String ReservationIdForPayment;
+    DocumentReference reservations;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservation);
-        reservation = new Reservation();
+
+        reservations = userDocRef.collection("Reservation").document();
+
         cost = 0;
         showParkingLotName = (TextView) findViewById(R.id.parkingLotField);
         showParkingSpotId = (TextView) findViewById(R.id.spotNumberField);
@@ -91,12 +97,15 @@ public class ReservationActivity extends OptionsMenuActivity {
 
     public void insertReservation(View view)
     {
-        reservation.setCost(cost);
-        reservation.setParkingLotId(ParkingLotIdFromBooking);
-        reservation.setParkingSpotId(BookingActivity.newReservation.getAvailableParkingSpot());
-        reservation.setReserveTime(Timestamp.now());
-        reservation.setUserId(user.getUid());
-        Task insert = resDocRef.set(reservation);
+        reservation = new Reservation(
+                Timestamp.now(),
+                ParkingLotIdFromBooking,
+                user.getUid(),
+                BookingActivity.newReservation.getAvailableParkingSpot(),
+                cost
+        );
+
+        Task insert = reservations.set(reservation);
         insert.addOnSuccessListener(o -> {
             Context context = getApplicationContext();
             CharSequence text = "Success!";
@@ -106,7 +115,7 @@ public class ReservationActivity extends OptionsMenuActivity {
             updateParkingSpotWithinParkingLot();
 
             Bundle bundle = new Bundle();
-            bundle.putString("ReservationIdForPayment", resDocRef.getId());
+            bundle.putString("ReservationIdForPayment", reservations.getId());
             //this needs to be changed by Jyoti to PaymentActivity - for the moment I have linked to MainActivity
             Intent intent = new Intent(getApplicationContext(), Home.class);
             intent.putExtras(bundle);

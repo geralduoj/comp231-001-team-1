@@ -84,6 +84,8 @@
     <string name="logo_first">todo</string>
     <string name="reservation_time">Reservation Time:</string>
     <string name="reservation_time_result">Reservation Time</string>
+    <string name="mm_yy">MM/YY</string>
+    <string name="default_payment_method">Default payment method</string>
 
     <string-array name="duration_array">
         <item>12hour - $20</item>

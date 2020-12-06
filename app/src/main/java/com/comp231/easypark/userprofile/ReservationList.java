@@ -60,11 +60,10 @@ public class ReservationList extends OptionsMenuActivity {
                         {
                             Reservation reservation = new Reservation( doc.getTimestamp("reserveTime"),
                                     doc.getString("parkingLotId"),
-                                    doc.getString("userId"), doc.getString("parkingSpotId"),(long) doc.get("cost"));
+                                    doc.getString("userId"), (long) doc.get("parkingSpotId"), (long) doc.get("cost"));
                             reservationList.add(reservation);
                         }
                     }
-
                 }
                 Log.d("LOGGER", "received reservation List");
                 listAdapter.notifyDataSetChanged();

@@ -49,12 +49,12 @@ public class PaymentMethodInfo extends OptionsMenuActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_method_info);
 
-        typeRadioGroup = findViewById(R.id.typeRadioGroup);
+        typeRadioGroup = findViewById(R.id.paymentTypeGroup);
         creditButton = findViewById(R.id.creditRadioButton);
         debitButton = findViewById(R.id.debitRadioButton);
-        holderName = findViewById(R.id.holderNameText);
-        cardNumber = findViewById(R.id.cardNumberText);
-        expirationDate = findViewById(R.id.expirationDate);
+        holderName = findViewById(R.id.nameOnCardField);
+        cardNumber = findViewById(R.id.cardNumber);
+        expirationDate = findViewById(R.id.cardExpirationDate);
         defaultMethod = findViewById(R.id.defaultMethod);
 
         method = (PaymentMethod) getIntent().getSerializableExtra("method");

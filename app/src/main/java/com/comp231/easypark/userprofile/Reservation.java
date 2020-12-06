@@ -9,8 +9,8 @@ public class Reservation implements Serializable {
     Timestamp reserveTime;
     String parkingLotId;
     String userId;
-    String parkingSpotId;
-    double cost;
+    long parkingSpotId;
+    long cost;
 
     public Timestamp getReserveTime() {
         return reserveTime;
@@ -36,23 +36,23 @@ public class Reservation implements Serializable {
         this.userId = userId;
     }
 
-    public String getParkingSpotId() {
+    public long getParkingSpotId() {
         return parkingSpotId;
     }
 
-    public void setParkingSpotId(String parkingSpotId) {
+    public void setParkingSpotId(long parkingSpotId) {
         this.parkingSpotId = parkingSpotId;
     }
 
-    public double getCost() {
+    public long getCost() {
         return cost;
     }
 
-    public void setCost(double cost) {
+    public void setCost(long cost) {
         this.cost = cost;
     }
 
-    public Reservation(Timestamp reserveTime, String parkingLotId, String userId, String parkingSpotId, double cost) {
+    public Reservation(Timestamp reserveTime, String parkingLotId, String userId, long parkingSpotId, long cost) {
         this.reserveTime = reserveTime;
         this.parkingLotId = parkingLotId;
         this.userId = userId;

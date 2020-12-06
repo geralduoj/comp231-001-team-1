@@ -4,99 +4,128 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
     tools:context=".userprofile.PaymentMethodInfo">
 
+
     <TextView
-        android:id="@+id/methodNameText"
+        android:id="@+id/paymentMethodTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:text="Payment Method"
-        android:textSize="36sp"
+        android:layout_marginTop="60dp"
+        android:text="@string/payment_method"
+        android:textSize="32sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.093"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <EditText
+        android:id="@+id/nameOnCardField"
+        android:layout_width="0dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/name_on_card"
+        android:inputType="textPersonName"
+        android:textColor="@color/dark_grey"
+        android:textColorHint="@color/dark_grey"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/paymentTypeGroup" />
+
+    <Button
+        android:id="@+id/saveProfileButton"
+        android:layout_width="271dp"
+        android:layout_height="75dp"
+        android:layout_marginBottom="84dp"
+        android:onClick="addMethod"
+        android:text="@string/save_profile"
+        android:textSize="20sp"
+        app:backgroundTint="#009688"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardExpirationDate" />
+
+    <EditText
+        android:id="@+id/cardNumber"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/card_number"
+        android:inputType="number"
+        android:textColor="@color/dark_grey"
+        android:textColorHint="@color/dark_grey"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameOnCardField" />
+
+    <EditText
+        android:id="@+id/cardExpirationDate"
+        android:layout_width="107dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/mm_yy"
+        android:inputType="date"
+        android:maxLength="5"
+        android:textColor="@color/dark_grey"
+        android:textColorHint="@color/dark_grey"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardNumber" />
+
     <RadioGroup
-        android:id="@+id/typeRadioGroup"
+        android:id="@+id/paymentTypeGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="@+id/methodNameText"
-        app:layout_constraintTop_toBottomOf="@+id/methodNameText">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.103"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/paymentMethodTitle">
 
         <RadioButton
             android:id="@+id/creditRadioButton"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Credit" />
+            android:layout_marginTop="48dp"
+            android:text="@string/credit"
+            android:textColor="@color/dark_grey"
+            android:textColorHint="@color/dark_grey"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <RadioButton
             android:id="@+id/debitRadioButton"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Debit" />
+            android:text="@string/debit"
+            android:textColor="@color/dark_grey"
+            android:textColorHint="@color/dark_grey"
+            android:textSize="20sp"
+            android:textStyle="bold" />
     </RadioGroup>
-
-    <EditText
-        android:id="@+id/holderNameText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:ems="10"
-        android:hint="Name on card"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/typeRadioGroup" />
-
-    <EditText
-        android:id="@+id/cardNumberText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="16dp"
-        android:ems="10"
-        android:hint="Card Number"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/typeRadioGroup" />
-
-    <EditText
-        android:id="@+id/expirationDate"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="MM/DD"
-        android:inputType="date"
-        android:maxLength="5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardNumberText" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:onClick="addMethod"
-        android:text="Save"
-        app:layout_constraintStart_toStartOf="@+id/expirationDate"
-        app:layout_constraintTop_toBottomOf="@+id/expirationDate" />
 
     <CheckBox
         android:id="@+id/defaultMethod"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Default Payment Method"
-        app:layout_constraintEnd_toEndOf="@+id/cardNumberText"
-        app:layout_constraintTop_toTopOf="@+id/expirationDate" />
+        android:layout_width="214dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="2dp"
+        android:text="@string/default_payment_method"
+        app:layout_constraintStart_toEndOf="@+id/cardExpirationDate"
+        app:layout_constraintTop_toTopOf="@+id/cardExpirationDate" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
