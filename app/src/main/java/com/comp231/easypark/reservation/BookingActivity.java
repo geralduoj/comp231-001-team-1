@@ -13,13 +13,14 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.comp231.easypark.MainActivity;
+import com.comp231.easypark.OptionsMenuActivity;
 import com.comp231.easypark.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class BookingActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class BookingActivity extends OptionsMenuActivity implements AdapterView.OnItemSelectedListener {
 
     //public String retrievedParkingLotID = "HBsJKENagjA6FHwSJUJh";
     private String seletectItem;

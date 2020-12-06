@@ -13,6 +13,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 import com.comp231.easypark.userprofile.DriverProfile;
 import com.comp231.easypark.userprofile.PaymentInfo;
 import com.comp231.easypark.userprofile.PaymentMethod;
+import com.comp231.easypark.userprofile.ProfileActivity;
 import com.comp231.easypark.userprofile.ReservationList;
 
 
@@ -37,7 +38,7 @@ public class OptionsMenuActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
             case R.id.profile:
-                Intent intent = new Intent(this, DriverProfile.class);
+                Intent intent = new Intent(this, ProfileActivity.class);
                 this.startActivity(intent);
                 break;
             case R.id.map:

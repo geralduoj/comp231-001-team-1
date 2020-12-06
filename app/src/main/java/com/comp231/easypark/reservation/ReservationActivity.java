@@ -12,6 +12,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.comp231.easypark.OptionsMenuActivity;
 import com.comp231.easypark.R;
 import com.comp231.easypark.userprofile.Home;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -28,7 +30,7 @@ import java.util.Date;
 import java.util.List;
 import static com.comp231.easypark.Login.user;
 
-public class ReservationActivity extends AppCompatActivity {
+public class ReservationActivity extends OptionsMenuActivity {
 
     List<ParkingSpot> spots;
     ParkingLot existingParkingLot;
