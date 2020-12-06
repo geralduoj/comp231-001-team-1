@@ -29,6 +29,7 @@
         <activity android:name=".RegisterPage" />
         <activity android:name=".reservation.BookingActivity" />
         <activity android:name=".reservation.ReservationActivity" />
+        <activity android:name=".payment.PaymentActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
