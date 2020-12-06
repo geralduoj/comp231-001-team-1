@@ -16,6 +16,7 @@ import android.util.Log;
 import android.widget.Button;
 
 import com.comp231.easypark.map.ParkingLot;
+import com.comp231.easypark.reservation.BookingActivity;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -289,7 +290,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             Bundle bundle = new Bundle();
             bundle.putString("docId", selectedParkingLot.getDocId());
             bundle.putString("lotName", selectedParkingLot.getName());
-            Intent intent = new Intent(getApplicationContext(), MapPassActivity.class);
+            //Intent intent = new Intent(getApplicationContext(), MapPassActivity.class);
+            //Changed by Iris - from MapPassActivity into BookingActivity
+            Intent intent = new Intent(getApplicationContext(), BookingActivity.class);
             intent.putExtras(bundle);
             startActivity(intent);
         });
