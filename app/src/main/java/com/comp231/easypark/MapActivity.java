@@ -52,7 +52,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MapActivity extends OptionsMenuActivity implements OnMapReadyCallback {
 
     private Button btnToggleTraffic;
     private SupportMapFragment mapFragment;
