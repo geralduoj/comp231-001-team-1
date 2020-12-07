@@ -11,6 +11,7 @@ import com.comp231.easypark.Login;
 import com.comp231.easypark.MapActivity;
 import com.comp231.easypark.OptionsMenuActivity;
 import com.comp231.easypark.R;
+import com.comp231.easypark.feedback.FeedbackActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 
@@ -33,6 +34,10 @@ public class Home extends OptionsMenuActivity {
 
     public void goToAutoCancelPage(View v){
         startActivity(new Intent(getApplicationContext(), AutoCancellationActivity.class));
+    }
+
+    public void goToReviewPage(View v){
+        startActivity(new Intent(getApplicationContext(), FeedbackActivity.class));
     }
 
     public void logout(View view) {

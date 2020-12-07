@@ -31,6 +31,7 @@
         <activity android:name=".reservation.BookingActivity" />
         <activity android:name=".reservation.ReservationActivity" />
         <activity android:name=".payment.PaymentActivity" />
+        <activity android:name=".feedback.FeedbackActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

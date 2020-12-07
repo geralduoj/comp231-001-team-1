@@ -30,6 +30,13 @@
         android:text="Auto Cancellation Demo" />
 
     <Button
+        android:id="@+id/btnGotoReview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="goToReviewPage"
+        android:text="User's Review" />
+
+    <Button
 
         android:id="@+id/logoutBtn"
         android:layout_width="match_parent"
