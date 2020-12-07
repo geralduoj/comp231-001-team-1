@@ -1,5 +1,6 @@
 package com.comp231.easypark;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -9,7 +10,11 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.comp231.easypark.reservation.ParkingLot;
+import com.comp231.easypark.reservation.ParkingSpot;
 import com.comp231.easypark.userprofile.Reservation;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
@@ -19,9 +24,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import android.content.Intent;
 
+import java.util.List;
+
 public class ConfirmationActivity extends AppCompatActivity {
 
     private String reservationId;
+    private String ParkingLotIdFromBooking;
     private Button btnArrived;
     private TextView txtReservationId;
     private static final long DURATION = 10 * 1000;
@@ -65,7 +73,7 @@ public class ConfirmationActivity extends AppCompatActivity {
                DocumentSnapshot document = task.getResult();
                if (document.exists()) {
                    reservation = new Reservation(document.getTimestamp("reserveTime"), document.getString("parkingLotId"), document.getString("userId"), (long) document.get("parkingSpotId"), (long) document.get("cost"));
-
+                   ParkingLotIdFromBooking = reservation.getParkingLotId();
                    Task insert = docRef.set(reservation);
                    insert.addOnSuccessListener(o -> {
                        Log.d(TAG, "YAY! timer added");
@@ -113,6 +121,7 @@ public class ConfirmationActivity extends AppCompatActivity {
                         Log.d(TAG, "reservation data: " + document.getData());
                         Log.e(TAG, "RESERVATION EXPIRED!");
                         docRef.delete().addOnSuccessListener(o->{
+                            updateParkingSpotWithinParkingLotForDelete();
                             Log.d(TAG, "RESERVATION DELETED!");
                             Intent intentToMap = new Intent(getApplicationContext(), MapActivity.class);
                             startActivity(intentToMap);
@@ -131,6 +140,98 @@ public class ConfirmationActivity extends AppCompatActivity {
         }
     }
 
+    private void updateParkingSpotWithinParkingLotForDelete() {
+
+        DocumentReference lotDocRef = db.collection("ParkingLotDemo").document(ParkingLotIdFromBooking);
+
+        lotDocRef.get().addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                DocumentSnapshot document = task.getResult();
+                if (document.exists()) {
+                    Log.d("TAG", "reservation data: " + document.getData());
+
+                    ParkingLot existingParkingLot = document.toObject(ParkingLot.class);
+
+                    List<ParkingSpot> spots=existingParkingLot.getSpots();
+
+                    if(spots != null){
+                        for(ParkingSpot s : spots){
+                            if(s.getStatus().equals("pending")){
+                                s.setStatus("free");
+                                break;
+                            }
+                        }
+
+                        lotDocRef.update("spots", spots)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Log.d("TAG", "DocumentSnapshot successfully updated!");
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.w("TAG", "Error updating document", e);
+                                    }
+                                });
+                    }
+
+                } else {
+                    Log.d("TAG", "No such Parking Lot");
+                }
+            }else{
+                Log.d("TAG", "get parking lot failed with ", task.getException());
+            }
+        });
+    }
+
+    private void updateParkingSpotWithinParkingLot() {
+
+        DocumentReference lotDocRef = db.collection("ParkingLotDemo").document(ParkingLotIdFromBooking);
+
+        lotDocRef.get().addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
+                DocumentSnapshot document = task.getResult();
+                if (document.exists()) {
+                    Log.d("TAG", "reservation data: " + document.getData());
+
+                    ParkingLot existingParkingLot = document.toObject(ParkingLot.class);
+
+                    List<ParkingSpot> spots=existingParkingLot.getSpots();
+
+                    if(spots != null){
+                        for(ParkingSpot s : spots){
+                            if(s.getStatus().equals("pending")){
+                                s.setStatus("booked");
+                                break;
+                            }
+                        }
+
+                        lotDocRef.update("spots", spots)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Log.d("TAG", "DocumentSnapshot successfully updated!");
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.w("TAG", "Error updating document", e);
+                                    }
+                                });
+                    }
+
+                } else {
+                    Log.d("TAG", "No such Parking Lot");
+                }
+            }else{
+                Log.d("TAG", "get parking lot failed with ", task.getException());
+            }
+        });
+    }
+
     private void checkReservation(){
         if(!txtReservationId.getText().toString().equals("")){
             reservationId = txtReservationId.getText().toString();
@@ -144,6 +245,7 @@ public class ConfirmationActivity extends AppCompatActivity {
                         //reservation = document.toObject(Reservation.class);
                         if(reservation.getReserveTime().getSeconds() + 15 * 60 > Timestamp.now().getSeconds()){
                             Log.d(TAG, "RESERVATION OK!");
+                            updateParkingSpotWithinParkingLot();
                             timerHandler.removeCallbacks(timerRun);
                             timer.setText("00:00:00");
                             endTime=0L;
