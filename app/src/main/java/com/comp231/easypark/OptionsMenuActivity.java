@@ -15,6 +15,7 @@ import com.comp231.easypark.userprofile.PaymentInfo;
 import com.comp231.easypark.userprofile.PaymentMethod;
 import com.comp231.easypark.userprofile.ProfileActivity;
 import com.comp231.easypark.userprofile.ReservationList;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 public class OptionsMenuActivity extends AppCompatActivity {
@@ -37,6 +38,11 @@ public class OptionsMenuActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
+            case R.id.logout:
+                FirebaseAuth.getInstance().signOut();//logout
+                startActivity(new Intent(getApplicationContext(),Login.class));
+                finish();
+                break;
             case R.id.profile:
                 Intent intent = new Intent(this, ProfileActivity.class);
                 this.startActivity(intent);
