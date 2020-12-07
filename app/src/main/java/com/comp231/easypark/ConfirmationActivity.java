@@ -16,9 +16,13 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class AutoCancellationActivity extends AppCompatActivity {
+
+import android.content.Intent;
+
+public class ConfirmationActivity extends AppCompatActivity {
+
+    private String reservationId;
     private Button btnArrived;
-    private Button btnAddDummy;
     private TextView txtReservationId;
     private static final long DURATION = 10 * 1000;
     private TextView timer;
@@ -26,44 +30,55 @@ public class AutoCancellationActivity extends AppCompatActivity {
     long endTime, updateTime = 0L;
     int mSec, sec, min;
 
-    private static final String TAG = "AutoCancelActivity";
+    private static final String TAG = "ConfirmationActivity";
 
-    private String reservationId;
     private FirebaseFirestore db;
     private Reservation reservation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_auto_cancellation);
+        setContentView(R.layout.activity_confirmation);
         db = FirebaseFirestore.getInstance();
 
         txtReservationId = findViewById(R.id.txtReservationId);
         timer = findViewById(R.id.timer);
         timerHandler = new Handler();
 
-        btnAddDummy = findViewById(R.id.btnAddDummy);
-        btnAddDummy.setOnClickListener(v->{
-//            String s = Login.userDocRef.getId();
-            DocumentReference docRef =  db.collection("Users").document(Login.userDocRef.getId()).collection("Reservation").document();
-            Log.d(TAG, "docId: " + docRef.getId());
-            txtReservationId.setText(docRef.getId());
-            Reservation r = new Reservation(Timestamp.now(), "CLCzWcWb86AUAVdyEDjm", "QLdaWjjxgZONlaEPd6o3HJ9rUud2", 1, 12);
-
-            Task insert = docRef.set(r);
-            insert.addOnSuccessListener(o -> {
-                Log.d(TAG, "YAY! dummy added");
-                endTime = SystemClock.uptimeMillis() + DURATION;
-                timerHandler.postDelayed(timerRun, 0);
-            });
-            insert.addOnFailureListener(o->{
-                Log.e(TAG, "OhO.. dummy escaped..");
-            });
-        });
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        reservationId = bundle.getString("reservationId");
+        Log.e("RESERVATION ID:", reservationId);
+        txtReservationId.setText(reservationId);
 
         btnArrived = findViewById(R.id.btnArrived);
         btnArrived.setOnClickListener(v -> {
             checkReservation();
+            Intent intentMap = new Intent(getApplicationContext(), MapActivity.class);
+            startActivity(intentMap);
+        });
+
+        DocumentReference docRef =  db.collection("Users").document(Login.userDocRef.getId()).collection("Reservation").document(reservationId);
+        docRef.get().addOnCompleteListener(task->{
+           if(task.isSuccessful()){
+               DocumentSnapshot document = task.getResult();
+               if (document.exists()) {
+                   reservation = new Reservation(document.getTimestamp("reserveTime"), document.getString("parkingLotId"), document.getString("userId"), (long) document.get("parkingSpotId"), (long) document.get("cost"));
+
+                   Task insert = docRef.set(reservation);
+                   insert.addOnSuccessListener(o -> {
+                       Log.d(TAG, "YAY! timer added");
+                       endTime = SystemClock.uptimeMillis() + DURATION;
+                       timerHandler.postDelayed(timerRun, 0);
+                   });
+                   insert.addOnFailureListener(o->{
+                       Log.e(TAG, "OhO.. timer escaped..");
+                   });
+               } else {
+                   Log.d(TAG, "No such reservation");
+               }
+           }
         });
     }
 
@@ -99,6 +114,8 @@ public class AutoCancellationActivity extends AppCompatActivity {
                         Log.e(TAG, "RESERVATION EXPIRED!");
                         docRef.delete().addOnSuccessListener(o->{
                             Log.d(TAG, "RESERVATION DELETED!");
+                            Intent intentToMap = new Intent(getApplicationContext(), MapActivity.class);
+                            startActivity(intentToMap);
                         }).addOnFailureListener(o -> {
                             Log.e(TAG, "oops, error on reservation deletion");
                         });
