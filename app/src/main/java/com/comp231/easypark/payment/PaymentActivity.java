@@ -15,6 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.comp231.easypark.AutoCancellationActivity;
+import com.comp231.easypark.ConfirmationActivity;
 import com.comp231.easypark.R;
 import com.comp231.easypark.reservation.ParkingLot;
 import com.comp231.easypark.reservation.ParkingSpot;
@@ -38,14 +40,14 @@ public class PaymentActivity extends AppCompatActivity {
 
     public static Driver currentDriver;
     TextView parkingSpotName, spotNumberText, priceText,txt4,txtReserveTime;
-    Button btn;
+    Button payNowButton;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     CollectionReference noteRef = db.collection("Reservation");
     List<ParkingSpot> parkingSpotsList;
     List<ParkingSpot> displayPriceList;
     Map.Entry<String, Long> displayPriceMap;
     Map.Entry<Integer, String> displaySpotMap;
-
+    public String reservationId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +64,18 @@ public class PaymentActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         String RetrievedReservationIdForPayment = bundle.getString("ReservationIdForPayment");
+        reservationId = RetrievedReservationIdForPayment;
+
+
+        payNowButton = findViewById(R.id.payNowButton);
+        payNowButton.setOnClickListener(v->{
+            Bundle bundle1 = new Bundle();
+            bundle1.putString("reservationId", reservationId);
+            Intent intent1= new Intent(getApplicationContext(), ConfirmationActivity.class);
+            intent1.putExtras(bundle1);
+            startActivity(intent1);
+        });
+
 
 
         DocumentReference reservationDocRef = userDocRef.collection("Reservation").document(RetrievedReservationIdForPayment);
@@ -155,10 +169,11 @@ public class PaymentActivity extends AppCompatActivity {
         return true;
     }
 
-    public void sendToConfirmation(View view) {
-        //   Intent intent = new Intent(PaymentActivity.this, ConfirmationActivity.class);
-        // startActivity(intent);
-    }
+//    public void sendToConfirmation(View view) {
+//        //   Intent intent = new Intent(PaymentActivity.this, ConfirmationActivity.class);
+//        // startActivity(intent);
+//
+//    }
 
 
 }
