@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -15,38 +14,28 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.comp231.easypark.AutoCancellationActivity;
 import com.comp231.easypark.ConfirmationActivity;
 import com.comp231.easypark.R;
 import com.comp231.easypark.reservation.ParkingLot;
-import com.comp231.easypark.reservation.ParkingSpot;
 import com.comp231.easypark.userprofile.Driver;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.time.Duration;
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
+
 import static com.comp231.easypark.Login.userDocRef;
 
 
 public class PaymentActivity extends AppCompatActivity {
 
     public static Driver currentDriver;
-    TextView parkingSpotName, spotNumberText, priceText,txt4,txtReserveTime;
+    TextView parkingSpotName, spotNumberText, priceText,txt4, parkingDuration, parkingTime;
     Button payNowButton;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    CollectionReference noteRef = db.collection("Reservation");
-    List<ParkingSpot> parkingSpotsList;
-    List<ParkingSpot> displayPriceList;
-    Map.Entry<String, Long> displayPriceMap;
-    Map.Entry<Integer, String> displaySpotMap;
     public String reservationId;
 
     @Override
@@ -59,7 +48,8 @@ public class PaymentActivity extends AppCompatActivity {
         spotNumberText = findViewById(R.id.spotNumberField);
         priceText = findViewById(R.id.price);
         //  btn = findViewById(R.id.btnCPay);
-        txtReserveTime = findViewById(R.id.parkingDuration);
+        parkingDuration = findViewById(R.id.parkingDuration);
+        parkingTime = findViewById(R.id.parkingTimeValue);
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
@@ -90,10 +80,32 @@ public class PaymentActivity extends AppCompatActivity {
 
                         String parkingLot = document.getString("parkingLotId");
                         //String reservationTime = p.getReservationTime().toString();
-                        txtReserveTime.setText(reserveTime.toString());
+                        parkingDuration.setText(reserveTime.toString());
                         long spotNumber = (long)document.get("parkingSpotId");
 
                         spotNumberText.setText("" + spotNumber);
+                        long price = (long) document.get("cost");
+                        priceText.setText("$" + price);
+
+                        String duration = "";
+
+                        switch ((int) price)
+                        {
+                            case 4:
+                                duration = "1h";
+                                break;
+                            case 12:
+                                duration = "6h";
+                                break;
+                            case 20:
+                                duration = "12h";
+                                break;
+                            case 30:
+                                duration = "24h";
+                                break;
+                        }
+                        parkingDuration.setText("" + duration);
+
                         Log.d("TAG", "ReservationTime: " + reserveTime);
                         Log.d("TAG", "ParkingLotId: " + parkingLot);
 
@@ -108,28 +120,10 @@ public class PaymentActivity extends AppCompatActivity {
                                     if (document.exists()) {
                                         ParkingLot p = document.toObject(ParkingLot.class);
                                         parkingSpotName.setText(p.getName());
-                                        List<ParkingSpot> parkingSpots= p.getSpots();
-//                                        for(int i=0;i<parkingSpots.size();i++){
-//                                            long id = Long.parseLong(String.valueOf(parkingSpots.get(i).getId()));
-//                                            String status = parkingSpots.get(i).getStatus();
-//                                            Log.d("TAG","Id: "+id+ "Status: "+status);
-//                                            if (status.equals("booked")){
-//                                                spotNumberText.setText(String.valueOf(id));
-//                                                break;
-//                                            }
-//                                            else{
-//                                                Log.d("TAG", "OOF! man");
-//                                            }
-//                                        }
 
-                                        Map<String,Long> map = p.getPrice();
-                                        String cost = String.valueOf(map.get("6hour"));        // get dynamic value from previous intent "6hour"
-
-                                        priceText.setText(cost);
-                                      // String duration = String.valueOf(map.get(Duration));
                                         SimpleDateFormat sdf = new SimpleDateFormat("h:mm a");
                                         String currentTime = sdf.format(new Date());
-                                        txtReserveTime.setText(currentTime);
+                                        parkingTime.setText(currentTime);
 
                                         Log.d("TAG", "DocumentSnapshot data: " + document.getData());
                                     } else {

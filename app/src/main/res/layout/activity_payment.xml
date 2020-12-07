@@ -36,10 +36,13 @@
 
     <TextView
         android:id="@+id/parkingLotField"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="68dp"
+        android:layout_marginEnd="44dp"
         android:text="@string/insert_parking_lot_name"
+        android:textAlignment="viewEnd"
         android:textColor="@color/dark_grey"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -63,17 +66,17 @@
 
     <TextView
         android:id="@+id/spotNumberField"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginLeft="48dp"
-        android:layout_marginTop="48dp"
+        android:layout_width="0dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="44dp"
         android:text="@string/insert_spot_number"
+        android:textAlignment="viewEnd"
         android:textColor="@color/dark_grey"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.126"
-        app:layout_constraintStart_toEndOf="@+id/spotNumberLabel"
+        app:layout_constraintHorizontal_bias="0.176"
+        app:layout_constraintStart_toStartOf="@+id/parkingLotField"
         app:layout_constraintTop_toBottomOf="@+id/parkingLotField" />
 
     <TextView
@@ -91,31 +94,59 @@
         app:layout_constraintTop_toBottomOf="@+id/spotNumberLabel" />
 
     <TextView
-        android:id="@+id/parkingDuration"
-        android:layout_width="124dp"
-        android:layout_height="65dp"
-        android:layout_marginStart="32dp"
+        android:id="@+id/parkingTimeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
         android:layout_marginTop="48dp"
+        android:text="Parking Time:"
+        android:textColor="@color/dark_grey"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/parkingDurationLabel" />
+
+    <TextView
+        android:id="@+id/parkingDuration"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="44dp"
         android:text="@string/insert_parking_duration"
+        android:textAlignment="viewEnd"
         android:textColor="@color/dark_grey"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.011"
-        app:layout_constraintStart_toEndOf="@+id/parkingDurationLabel"
+        app:layout_constraintStart_toStartOf="@+id/spotNumberField"
         app:layout_constraintTop_toBottomOf="@+id/spotNumberField" />
+
+    <TextView
+        android:id="@+id/parkingTimeValue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="44dp"
+        android:text="@string/insert_parking_duration"
+        android:textAlignment="viewEnd"
+        android:textColor="@color/dark_grey"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.013"
+        app:layout_constraintStart_toStartOf="@+id/parkingDuration"
+        app:layout_constraintTop_toBottomOf="@+id/parkingDuration" />
 
     <TextView
         android:id="@+id/priceLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="124dp"
-        android:layout_marginTop="60dp"
         android:text="@string/price"
         android:textColor="@color/dark_grey"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/payNowButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/parkingDurationLabel"
+        app:layout_constraintTop_toBottomOf="@+id/parkingTimeLabel"
         app:layout_constraintVertical_bias="0.211" />
 
     <TextView
@@ -132,7 +163,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.061"
         app:layout_constraintStart_toEndOf="@+id/priceLabel"
-        app:layout_constraintTop_toBottomOf="@+id/parkingDuration"
+        app:layout_constraintTop_toBottomOf="@+id/parkingTimeValue"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView

@@ -22,22 +22,22 @@
         app:srcCompat="@drawable/logo" />
 
     <EditText
+        android:id="@+id/loginPage_emailR"
         android:layout_width="288dp"
         android:layout_height="60dp"
-        android:id="@+id/loginPage_emailR"
-        android:maxLength="50"
-        android:layout_marginTop="150dp"
+        android:layout_below="@+id/logoImage"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        android:backgroundTint="@color/white"
         android:gravity="center|left"
-        android:padding="20dp"
         android:hint="@string/email"
         android:inputType="textEmailAddress"
+        android:maxLength="50"
+        android:padding="20dp"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:backgroundTint="@color/white"
-        android:layout_below="@+id/logoImage"
 
         />
 

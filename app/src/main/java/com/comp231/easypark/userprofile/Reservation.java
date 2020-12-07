@@ -59,4 +59,5 @@ public class Reservation implements Serializable {
         this.parkingSpotId = parkingSpotId;
         this.cost = cost;
     }
+
 }

@@ -2,7 +2,7 @@
     <string name="app_name">EasyPark</string>
     <string name="defaultMethod">DEFAULT</string>
     <string name="logo">Logo</string>
-    <string name="email">EMAIL</string>
+    <string name="email">Email</string>
     <string name="password">PASSWORD</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="log_in">LOG IN</string>
