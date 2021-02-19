@@ -2,6 +2,10 @@
 
 This LiMapDemo includes the search function on Map with filter options for EasyPark project.
 
+## Test Pushes
+Charles pushed successfully!
+
+
 ## Status
 
 1st Iteration
