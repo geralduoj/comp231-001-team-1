@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/login_pristine_background"
-    tools:context=".Login">
-
+    tools:context=".psm.PsmLoginActivity">
 
     <ImageView
         android:id="@+id/logoImage"
@@ -15,11 +14,18 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="72dp"
         android:contentDescription="@string/logo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/forgotPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/psm_login"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:layout_below="@+id/logoImage"
+        android:layout_centerInParent="true" />
 
     <EditText
         android:id="@+id/loginPage_emailR"
@@ -99,19 +105,6 @@
         app:backgroundTint="#FFFFFF"
         app:layout_constraintStart_toEndOf="@+id/newUserLabel" />
 
-    <TextView
-        android:id="@+id/forgotPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/forgot_password"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/progressBar"
-        android:layout_below="@+id/newUserLabel"
-        android:layout_centerInParent="true" />
-    />
-
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_centerInParent="true"
@@ -122,25 +115,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_below="@id/forgotPassword"
+        android:layout_below="@id/loginPage_loginBtn"
         app:layout_constraintVertical_bias="0.39" />
-
-    <Button
-        android:id="@+id/loginAsPSM"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/forgotPassword"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="85dp"
-        android:layout_marginTop="14dp"
-        android:layout_marginEnd="85dp"
-        android:text="@string/psm_login_btn"
-        android:textColor="@color/login_button"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:backgroundTint="#FFFFFF" />
-
 
 </RelativeLayout>

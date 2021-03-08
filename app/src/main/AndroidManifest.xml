@@ -16,7 +16,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EasyPark">
-        <activity android:name=".psm.ViewParkingLotsActivity"></activity>
+        <activity android:name=".psm.PsmDashboardActivity"></activity>
+        <activity android:name=".psm.PsmLoginActivity" />
+        <activity android:name=".psm.ViewParkingLotsActivity" />
         <activity android:name=".psm.CreateParkingLotActivity" />
         <activity android:name=".ConfirmationActivity" />
         <activity android:name=".userprofile.EditProfileActivity" />

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="50dp"
+    android:orientation="vertical"
+    tools:context=".psm.PsmDashboardActivity">
+
+    <Button
+        android:id="@+id/profileBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="goToProfile"
+        android:text="profile" />
+
+    <Button
+        android:id="@+id/parkingLotsBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="goToViewParkingLots"
+        android:text="Parking lots" />
+
+    <Button
+
+        android:id="@+id/logoutBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="logout"
+        android:text="LogOut" />
+
+</LinearLayout>

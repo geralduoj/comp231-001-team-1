@@ -86,6 +86,8 @@
     <string name="reservation_time_result">Reservation Time</string>
     <string name="mm_yy">MM/YY</string>
     <string name="default_payment_method">Default payment method</string>
+    <string name="psm_login">Log in as a Parking Space Manager</string>
+    <string name="psm_login_btn">Log in as a PSM</string>
     <string name="create_parking_lot_title">Create New Parking Lot</string>
     <string name="create_parking_lot_btn">Create</string>
     <string name="view_parking_lots_title">Your Parking Lots</string>

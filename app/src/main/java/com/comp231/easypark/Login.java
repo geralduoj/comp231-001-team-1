@@ -16,6 +16,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.comp231.easypark.psm.PsmLoginActivity;
 import com.comp231.easypark.userprofile.Home;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -31,7 +32,7 @@ public class Login extends AppCompatActivity {
     public static final String TAG = "TAG";
     public static FirebaseUser user;
     private EditText loginPageEmail, loginPagePassword;
-    private Button loginPage_registerBtn,loginPage_loginBtn;
+    private Button loginPage_registerBtn,loginPage_loginBtn, loginAsPSM;
     private TextView forgotTextLink;
     ProgressBar progressBar;
 
@@ -49,6 +50,7 @@ public class Login extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
         forgotTextLink = findViewById(R.id.forgotPassword);
         loginPage_loginBtn=findViewById(R.id.loginPage_loginBtn);
+        loginAsPSM = findViewById(R.id.loginAsPSM);
 
         loginPage_registerBtn = findViewById(R.id.loginPage_registerBtn);
         fAuth = FirebaseAuth.getInstance();
@@ -146,6 +148,13 @@ public class Login extends AppCompatActivity {
 
                 passwordResetDialog.create().show();
 
+            }
+        });
+
+        loginAsPSM.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), PsmLoginActivity.class));
             }
         });
 
