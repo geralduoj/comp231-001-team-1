@@ -6,6 +6,12 @@ public class ParkingSpot implements Serializable {
     private long id;
     private String status;
 
+    public ParkingSpot() { }
+    public ParkingSpot(long id, String status) {
+        this.id = id;
+        this.status = status;
+    }
+
     public long getId() {
         return id;
     }
