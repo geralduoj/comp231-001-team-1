@@ -1,7 +1,10 @@
 package com.comp231.easypark.psm;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
@@ -14,10 +17,15 @@ import com.comp231.easypark.R;
 import com.comp231.easypark.RegisterPage;
 import com.comp231.easypark.reservation.ParkingLot;
 import com.comp231.easypark.reservation.ParkingSpot;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.GeoPoint;
+import com.google.firebase.firestore.Transaction;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -74,8 +82,25 @@ public class CreateParkingLotActivity extends AppCompatActivity {
                 Task insert = docRef.set(newParkingLot);
                 insert.addOnSuccessListener(o -> {
                     Log.d("TAG", "New parking lot added!");
-                    Toast.makeText(CreateParkingLotActivity.this, "New parking lot registered", Toast.LENGTH_SHORT).show();
-                    finish();
+                    // Also update PSM data
+                    PSM newData = PSMManager.getPSM();
+                    newData.addParkingLot(newParkingLot.getDocId());
+                    PSMManager.setPSM(newData);
+                    DocumentReference sfDocRef = db.collection("PSM").document(PSMManager.getPSM().getEmail());
+                    db.runTransaction(new Transaction.Function<Void>() {
+                        @Override
+                        public Void apply(Transaction transaction) throws FirebaseFirestoreException {
+                            DocumentSnapshot snapshot = transaction.get(sfDocRef);
+                            transaction.update(sfDocRef, "parkingLots", newData.getParkingLots());
+                            return null;
+                        }
+                    }).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(CreateParkingLotActivity.this, "New parking lot registered", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    });
                 });
                 insert.addOnFailureListener(o->{
                     Log.e("TAG", "Failed to add new parking lot.");
@@ -83,6 +108,5 @@ public class CreateParkingLotActivity extends AppCompatActivity {
                 });
             }
         });
-
     }
 }

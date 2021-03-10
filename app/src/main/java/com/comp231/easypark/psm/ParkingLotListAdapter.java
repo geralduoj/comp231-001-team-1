@@ -5,7 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,11 +15,15 @@ import androidx.annotation.Nullable;
 
 import com.comp231.easypark.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ParkingLotListAdapter extends BaseAdapter {
 
     Context context;
     private final String[] names;
     private final String[] descriptions;
+    private int selectedPosition = 0;
 
     public ParkingLotListAdapter(Context context, String[] names, String[] descriptions) {
         this.context = context;
@@ -49,9 +55,9 @@ public class ParkingLotListAdapter extends BaseAdapter {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(context);
             convertView = inflater.inflate(R.layout.parking_lot_list_item, parent, false);
-            viewHolder.image = (ImageView) convertView.findViewById(R.id.imgLot);
             viewHolder.name = (TextView)convertView.findViewById(R.id.txtName);
             viewHolder.description = (TextView)convertView.findViewById(R.id.txtDescription);
+            viewHolder.radio = (RadioButton)convertView.findViewById(R.id.radioButton);
 
             result = convertView;
 
@@ -63,13 +69,26 @@ public class ParkingLotListAdapter extends BaseAdapter {
 
         viewHolder.name.setText(names[position]);
         viewHolder.description.setText(descriptions[position]);
+        viewHolder.radio.setChecked(position == selectedPosition);
+        viewHolder.radio.setTag(position);
+        viewHolder.radio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectedPosition = (Integer)view.getTag();
+                notifyDataSetChanged();
+            }
+        });
 
         return convertView;
     }
 
+    public int getSelectedPosition() {
+        return selectedPosition;
+    }
+
 
     private static class ViewHolder {
-        ImageView image;
+        RadioButton radio;
         TextView name;
         TextView description;
     }

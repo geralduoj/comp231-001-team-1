@@ -92,6 +92,7 @@
     <string name="create_parking_lot_btn">Create</string>
     <string name="view_parking_lots_title">Your Parking Lots</string>
     <string name="view_parking_lots_btnCreate">Create New</string>
+    <string name="view_parking_lots_btnEdit">Edit</string>
     <string name="view_parking_lots_btnDelete">Delete</string>
 
     <string-array name="duration_array">

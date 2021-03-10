@@ -59,6 +59,9 @@ public class PsmLoginActivity extends AppCompatActivity {
                                 // Does the password match?
                                 if (psm.PasswordConfirmation(loginPagePassword.getText().toString())) {
                                     Log.d("TAG", "Password correct!");
+                                    // Save the PSM in the PSMManager
+                                    PSMManager.setPSM(psm);
+                                    // Go to the PSM dashboard
                                     startActivity(new Intent(getApplicationContext(), PsmDashboardActivity.class));
                                 } else {
                                     Log.d("TAG", "Password wrong!");

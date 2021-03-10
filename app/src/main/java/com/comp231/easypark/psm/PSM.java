@@ -32,4 +32,5 @@ public class PSM {
     public String getEmail() { return this.email; }
     public String getPassword() { return this.password; }
     public List<String> getParkingLots() { return this.parkingLots; }
+    public void addParkingLot(String newPL) { parkingLots.add(newPL); }
 }
