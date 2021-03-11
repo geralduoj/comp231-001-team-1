@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".psm.CreateParkingLotActivity">
+    tools:context=".psm.ApplyPsmLicenseActivity">
 
     <TextView
-        android:id="@+id/createParkingLotTitle"
+        android:id="@+id/applyLicenseTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="60dp"
-        android:text="@string/create_parking_lot_title"
+        android:text="@string/apply_license_title"
         android:textSize="32sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,99 +20,93 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/applyLicense_Explanation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:text="@string/apply_license_explanation"
+        android:layout_below="@id/applyLicenseTitle"/>
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/createParkingLot_Name"
+        android:id="@+id/applyLicense_Name"
         android:maxLength="20"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="10dp"
         android:textColor="@color/dark_grey"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         android:gravity="center|left"
         android:padding="20dp"
-        android:hint="Name"
+        android:hint="Full Name"
+        android:layout_below="@id/applyLicense_Explanation"
         />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/createParkingLot_Description"
+        android:id="@+id/applyLicense_Address"
         android:maxLength="20"
         android:textColor="@color/dark_grey"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         android:gravity="center|left"
         android:padding="20dp"
-        android:hint="Description"
-        android:layout_below="@id/createParkingLot_Name"
+        android:hint="Business Address"
+        android:layout_below="@id/applyLicense_Name"
         />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/createParkingLot_Latitude"
+        android:id="@+id/applyLicense_Email"
         android:maxLength="20"
         android:textColor="@color/dark_grey"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         android:gravity="center|left"
         android:padding="20dp"
-        android:hint="Latitude"
-        android:layout_below="@id/createParkingLot_Description"
-        />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/createParkingLot_Longitude"
-        android:maxLength="20"
-        android:textColor="@color/dark_grey"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:gravity="center|left"
-        android:padding="20dp"
-        android:hint="Longitude"
-        android:layout_below="@id/createParkingLot_Latitude"
-        />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/createParkingLot_SpotNum"
-        android:maxLength="20"
-        android:textColor="@color/dark_grey"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:gravity="center|left"
-        android:padding="20dp"
-        android:inputType="number"
-        android:hint="No. parking spots"
-        android:layout_below="@id/createParkingLot_Longitude"
+        android:hint="Email"
+        android:layout_below="@id/applyLicense_Address"
         />
 
     <Button
         android:layout_width="271dp"
         android:layout_height="75dp"
-        android:id="@+id/createParkingLot_CreateBtn"
-        android:layout_below="@id/createParkingLot_SpotNum"
+        android:id="@+id/applyLicense_ApplyBtn"
+        android:layout_below="@id/applyLicense_Email"
         android:layout_centerInParent="true"
         android:layout_marginTop="12dp"
         android:textSize="20sp"
         app:backgroundTint="#009688"
-        android:text="@string/create_parking_lot_btn"
+        android:text="@string/apply_license_apply_btn"
         />
+
+    <TextView
+        android:id="@+id/applyLicense_ThankYou"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:text="@string/apply_license_thankyou"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_below="@id/applyLicense_ApplyBtn"/>
 
     <Button
         android:layout_width="271dp"
         android:layout_height="75dp"
-        android:id="@+id/createParkingLot_CancelBtn"
-        android:layout_below="@id/createParkingLot_CreateBtn"
+        android:id="@+id/applyLicense_BackBtn"
+        android:layout_below="@id/applyLicense_ThankYou"
         android:layout_centerInParent="true"
         android:layout_marginTop="12dp"
         android:textSize="20sp"
         app:backgroundTint="#009688"
-        android:text="@string/cancel"
+        android:text="@string/back"
         />
 
 </RelativeLayout>

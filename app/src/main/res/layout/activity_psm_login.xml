@@ -78,20 +78,9 @@
         android:text="@string/log_in"
         android:layout_marginTop="8dp"
         />
-    <TextView
-        android:id="@+id/newUserLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="108dp"
-        android:layout_marginLeft="108dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/new_user"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:layout_below="@id/loginPage_loginBtn" />
 
     <Button
-        android:id="@+id/loginPage_registerBtn"
+        android:id="@+id/loginPage_applyBtn"
         android:textColor="@color/login_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -99,11 +88,10 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="6dp"
         android:layout_marginEnd="73dp"
-        android:text="@string/sign_up"
+        android:text="@string/psm_apply_btn"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:backgroundTint="#FFFFFF"
-        app:layout_constraintStart_toEndOf="@+id/newUserLabel" />
+        app:backgroundTint="#FFFFFF" />
 
     <ProgressBar
         android:id="@+id/progressBar"

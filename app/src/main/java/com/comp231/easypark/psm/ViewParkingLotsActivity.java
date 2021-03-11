@@ -66,7 +66,10 @@ public class ViewParkingLotsActivity extends AppCompatActivity {
         btnEditSelected.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                // Get the selected ParkingLot and pass it to the editing activity
+                int selectedParkingLot = parkingLotListAdapter.getSelectedPosition();
+                PSMManager.setCurrentParkingLot(parkingLots.get(selectedParkingLot));
+                startActivity(new Intent(getApplicationContext(), EditParkingLotActivity.class));
             }
         });
         btnDeleteSelected.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +91,7 @@ public class ViewParkingLotsActivity extends AppCompatActivity {
                                 db.runTransaction(new Transaction.Function<Void>() {
                                     @Override
                                     public Void apply(Transaction transaction) throws FirebaseFirestoreException {
-                                        DocumentSnapshot snapshot = transaction.get(sfDocRef);
+                                        //DocumentSnapshot snapshot = transaction.get(sfDocRef);
                                         transaction.update(sfDocRef, "parkingLots", newData.getParkingLots());
                                         return null;
                                     }
