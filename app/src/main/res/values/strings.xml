@@ -88,12 +88,20 @@
     <string name="default_payment_method">Default payment method</string>
     <string name="psm_login">Log in as a Parking Space Manager</string>
     <string name="psm_login_btn">Log in as a PSM</string>
+    <string name="psm_apply_btn">Apply for a license</string>
     <string name="create_parking_lot_title">Create New Parking Lot</string>
     <string name="create_parking_lot_btn">Create</string>
     <string name="view_parking_lots_title">Your Parking Lots</string>
     <string name="view_parking_lots_btnCreate">Create New</string>
     <string name="view_parking_lots_btnEdit">Edit</string>
     <string name="view_parking_lots_btnDelete">Delete</string>
+    <string name="edit_parking_lot_title">Edit Parking Lot</string>
+    <string name="edit_parking_lot_btn">Update</string>
+    <string name="apply_license_title">Apply for a PSM license</string>
+    <string name="apply_license_explanation">Please enter the below details to make a priliminary application to become a Parking Space Manager (PSM).</string>
+    <string name="apply_license_apply_btn">Apply</string>
+    <string name="apply_license_thankyou">Thank you for your application.  We will contact you shortly about your background check.</string>
+    <string name="back">Back</string>
 
     <string-array name="duration_array">
         <item>12hour - $20</item>

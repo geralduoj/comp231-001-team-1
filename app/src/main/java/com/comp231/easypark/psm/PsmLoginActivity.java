@@ -25,7 +25,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class PsmLoginActivity extends AppCompatActivity {
 
     private EditText loginPageEmail, loginPagePassword;
-    private Button loginPage_loginBtn;
+    private Button loginPage_loginBtn, loginPage_applyBtn;
     ProgressBar progressBar;
 
     private FirebaseFirestore db;
@@ -41,7 +41,7 @@ public class PsmLoginActivity extends AppCompatActivity {
         loginPagePassword=findViewById(R.id.loginPage_passwordR);
         progressBar = findViewById(R.id.progressBar);
         loginPage_loginBtn=findViewById(R.id.loginPage_loginBtn);
-        // TODO: Sign up button (replace it with PSM license application button?)
+        loginPage_applyBtn = findViewById(R.id.loginPage_applyBtn);
 
         loginPage_loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +74,13 @@ public class PsmLoginActivity extends AppCompatActivity {
                         }
                     }
                 });
+            }
+        });
+
+        loginPage_applyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), ApplyPsmLicenseActivity.class));
             }
         });
 
