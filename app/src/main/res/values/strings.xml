@@ -102,6 +102,7 @@
     <string name="apply_license_apply_btn">Apply</string>
     <string name="apply_license_thankyou">Thank you for your application.  We will contact you shortly about your background check.</string>
     <string name="back">Back</string>
+    <string name="view_feedback_title">Your Feedback</string>
 
     <string-array name="duration_array">
         <item>12hour - $20</item>

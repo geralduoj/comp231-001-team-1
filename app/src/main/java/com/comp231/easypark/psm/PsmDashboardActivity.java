@@ -28,6 +28,10 @@ public class PsmDashboardActivity extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(), ViewParkingLotsActivity.class));
     }
 
+    public void goToViewFeedback(View view) {
+        startActivity(new Intent(getApplicationContext(), ViewPsmFeedbackActivity.class));
+    }
+
     public void logout(View view) {
         // TODO: Do we have to formally log out of the session?
         startActivity(new Intent(getApplicationContext(), PsmLoginActivity.class));

@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.comp231.easypark.Login;
 import com.comp231.easypark.R;
@@ -151,7 +152,8 @@ public class ViewParkingLotsActivity extends AppCompatActivity {
                                    });
                                }
                            } else {
-                               // TODO: What if there're no parking lots?
+                               Log.e("TAG", "Couldn't find any documents.");
+                               Toast.makeText(ViewParkingLotsActivity.this, "We couldn't find any parking lots", Toast.LENGTH_SHORT).show();
                            }
                        }
                    }
