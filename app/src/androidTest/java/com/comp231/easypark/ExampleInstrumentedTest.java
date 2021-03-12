@@ -23,4 +23,10 @@ public class ExampleInstrumentedTest {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         assertEquals("com.comp231.easypark", appContext.getPackageName());
     }
+    @Test
+    public void testAppNameContext() {
+        // Context of the app under test.
+        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+        assertEquals("EasyPark", appContext.getText(R.string.app_name));
+    }
 }
