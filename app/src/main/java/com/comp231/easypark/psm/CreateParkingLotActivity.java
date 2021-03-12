@@ -35,7 +35,7 @@ import java.util.Map;
 public class CreateParkingLotActivity extends AppCompatActivity {
 
     private EditText txtName, txtDescription, txtLatitude, txtLongitude, txtNumSpots;
-    private Button btnCreate;
+    private Button btnCreate, btnCancel;
 
     private FirebaseFirestore db;
 
@@ -106,6 +106,14 @@ public class CreateParkingLotActivity extends AppCompatActivity {
                     Log.e("TAG", "Failed to add new parking lot.");
                     Toast.makeText(CreateParkingLotActivity.this, "An error occurred", Toast.LENGTH_SHORT).show();
                 });
+            }
+        });
+
+        btnCancel = (Button)findViewById(R.id.createParkingLot_CancelBtn);
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
