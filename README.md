@@ -2,16 +2,19 @@
 
 This LiMapDemo includes the search function on Map with filter options for EasyPark project.
 
-## Test Pushes
-Charles pushed successfully!
-
 
 ## Status
 
-1st Iteration
+Release 1.0 for Easy Park Enterprise Upgrade complete.
 
+Coders:
+Charles Thomson
+Gerald Uchie-Okoro
+Bernardo Castro
+Fawad Sayed Rahim
+Shima Mortazavirashtchi
 
-
+=========================================================
 ```
 Coder: Duc Dang
     1. registration and login
