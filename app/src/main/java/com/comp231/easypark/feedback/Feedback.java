@@ -4,6 +4,7 @@ public class Feedback {
     private String name;
     private String ratingBar;
     private String review;
+    private String psmId;
 
     public String getName() {
         return name;
@@ -28,4 +29,8 @@ public class Feedback {
     public void setReview(String review) {
         this.review = review;
     }
+
+    public String getPsmId() { return psmId; }
+
+    public void setPsmId(String psmId) { this.psmId = psmId; }
 }

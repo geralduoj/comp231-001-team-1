@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 public class PasswordLengthTest {
     String test = "password";
     @Test
-    public void passwordLenght_Test(){
+    public void passwordLength_Test(){
         assertEquals(8, test.length());
         assert test.length() == 8;
     }

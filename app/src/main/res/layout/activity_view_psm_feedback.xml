@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".psm.ViewPsmFeedbackActivity">
+
+    <TextView
+        android:id="@+id/applyLicenseTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:text="@string/view_feedback_title"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ListView
+        android:id="@+id/listViewFeedback"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_below="@+id/applyLicenseTitle"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:gravity="center|left"
+        android:padding="20dp"
+        app:layout_constraintTop_toBottomOf="@id/applyLicenseTitle">
+    </ListView>
+
+    <Button
+        android:layout_width="271dp"
+        android:layout_height="75dp"
+        android:id="@+id/applyLicense_BackBtn"
+        android:layout_below="@id/listViewFeedback"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="12dp"
+        android:textSize="20sp"
+        app:backgroundTint="#009688"
+        android:text="@string/back"
+        />
+
+</RelativeLayout>

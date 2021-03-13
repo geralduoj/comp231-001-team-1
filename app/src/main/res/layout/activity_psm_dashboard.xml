@@ -23,7 +23,13 @@
         android:text="Parking lots" />
 
     <Button
+        android:id="@+id/feedbackBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="goToViewFeedback"
+        android:text="Feedback" />
 
+    <Button
         android:id="@+id/logoutBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
