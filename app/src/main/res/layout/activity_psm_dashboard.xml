@@ -12,6 +12,7 @@
         android:id="@+id/profileBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/holo_blue_light"
         android:onClick="goToProfile"
         android:text="profile" />
 
@@ -20,6 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="goToViewParkingLots"
+        android:backgroundTint="@android:color/holo_blue_light"
         android:text="Parking lots" />
 
     <Button
@@ -27,6 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="goToViewFeedback"
+        android:backgroundTint="@android:color/holo_blue_light"
         android:text="Feedback" />
 
     <Button
@@ -34,6 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="logout"
+        android:backgroundTint="@android:color/holo_blue_light"
         android:text="LogOut" />
 
 </LinearLayout>
