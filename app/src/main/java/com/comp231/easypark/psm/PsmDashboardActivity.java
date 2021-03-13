@@ -21,7 +21,7 @@ public class PsmDashboardActivity extends AppCompatActivity {
 
     public void goToProfile(View view) {
         // TODO: Profile activity and link
-        //startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+        startActivity(new Intent(getApplicationContext(), PSMProfileActivity.class));
     }
 
     public void goToViewParkingLots(View view) {
@@ -35,6 +35,7 @@ public class PsmDashboardActivity extends AppCompatActivity {
     public void logout(View view) {
         // TODO: Do we have to formally log out of the session?
         startActivity(new Intent(getApplicationContext(), PsmLoginActivity.class));
+        PSMManager.setPSM(null);
         finish();
     }
 }
