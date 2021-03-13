@@ -18,6 +18,7 @@
         android:theme="@style/Theme.EasyPark">
         <activity android:name=".psm.EditPSMProfileActivity"></activity>
         <activity android:name=".psm.PSMProfileActivity" />
+        <activity android:name=".psm.MapSelectionActivity"></activity>
         <activity android:name=".psm.ViewPsmFeedbackActivity" />
         <activity android:name=".psm.ApplyPsmLicenseActivity" />
         <activity android:name=".psm.EditParkingLotActivity" />

@@ -91,6 +91,7 @@
     <string name="psm_apply_btn">Apply for a license</string>
     <string name="create_parking_lot_title">Create New Parking Lot</string>
     <string name="create_parking_lot_btn">Create</string>
+    <string name="create_parking_lot_map_btn">Use map</string>
     <string name="view_parking_lots_title">Your Parking Lots</string>
     <string name="view_parking_lots_btnCreate">Create New</string>
     <string name="view_parking_lots_btnEdit">Edit</string>

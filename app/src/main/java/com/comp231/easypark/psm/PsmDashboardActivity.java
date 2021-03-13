@@ -6,10 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.comp231.easypark.Login;
 import com.comp231.easypark.R;
-import com.comp231.easypark.userprofile.ProfileActivity;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class PsmDashboardActivity extends AppCompatActivity {
 
@@ -20,7 +17,6 @@ public class PsmDashboardActivity extends AppCompatActivity {
     }
 
     public void goToProfile(View view) {
-        // TODO: Profile activity and link
         startActivity(new Intent(getApplicationContext(), PSMProfileActivity.class));
     }
 
@@ -33,7 +29,6 @@ public class PsmDashboardActivity extends AppCompatActivity {
     }
 
     public void logout(View view) {
-        // TODO: Do we have to formally log out of the session?
         startActivity(new Intent(getApplicationContext(), PsmLoginActivity.class));
         PSMManager.setPSM(null);
         finish();

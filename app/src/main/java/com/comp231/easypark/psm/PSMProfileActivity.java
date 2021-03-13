@@ -6,6 +6,7 @@ import com.comp231.easypark.R;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class PSMProfileActivity extends AppCompatActivity {
@@ -14,7 +15,7 @@ public class PSMProfileActivity extends AppCompatActivity {
     TextView lastName;
     TextView email;
 
-
+    Button btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +29,17 @@ public class PSMProfileActivity extends AppCompatActivity {
         firstName.setText(PSMManager.getPSM().getFirstName());
         lastName.setText(PSMManager.getPSM().getLastName());
         email.setText(PSMManager.getPSM().getEmail());
+
+        btnBack = (Button)findViewById(R.id.backButton);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     public void goToUpdateProfile(View view) {
-        // TODO: Profile activity and link
         startActivity(new Intent(getApplicationContext(), EditPSMProfileActivity.class));
     }
 }

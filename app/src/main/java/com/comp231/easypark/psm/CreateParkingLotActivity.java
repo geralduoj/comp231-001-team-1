@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -35,7 +36,7 @@ import java.util.Map;
 public class CreateParkingLotActivity extends AppCompatActivity {
 
     private EditText txtName, txtDescription, txtLatitude, txtLongitude, txtNumSpots;
-    private Button btnCreate, btnCancel;
+    private Button btnCreate, btnCancel, btnUseMap;
 
     private FirebaseFirestore db;
 
@@ -63,7 +64,7 @@ public class CreateParkingLotActivity extends AppCompatActivity {
                 double latitude = Double.parseDouble(txtLatitude.getText().toString());
                 double longitude = Double.parseDouble(txtLongitude.getText().toString());
                 newParkingLot.setLocation(new GeoPoint(latitude, longitude));
-                // TODO: Price not handled properly yet, need to implement
+                // Price not handled properly yet, need to implement
                 Map<String, Long> price = new HashMap<String, Long>();
                 price.put("12hour", (long)22);
                 price.put("1hour", (long)123);
@@ -116,5 +117,24 @@ public class CreateParkingLotActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        btnUseMap = (Button)findViewById(R.id.createParkingLot_MapBtn);
+        btnUseMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), MapSelectionActivity.class));
+            }
+        });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Put in values set for the location
+        GeoPoint selectedPoint = PSMManager.getLocationRef();
+        if (selectedPoint != null) {
+            txtLatitude.setText(Double.toString(selectedPoint.getLatitude()));
+            txtLongitude.setText(Double.toString(selectedPoint.getLongitude()));
+        }
     }
 }

@@ -49,8 +49,6 @@ public class EditPSMProfileActivity extends AppCompatActivity {
     }
 
     public void saveInformation(View view) {
-        // TODO: Profile activity and link
-        //startActivity(new Intent(getApplicationContext(), PSMProfileActivity.class));
         String fname = firstNameEdit.getText().toString();
         String lname = lastNameEdit.getText().toString();
         String pass;

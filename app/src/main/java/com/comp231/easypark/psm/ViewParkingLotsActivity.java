@@ -123,42 +123,44 @@ public class ViewParkingLotsActivity extends AppCompatActivity {
         parkingLots = new ArrayList<>();
         showSpinner();
         // First get fresh list of ParkingLots/PSM data
-        DocumentReference docRef = db.collection("PSM").document(PSMManager.getPSM().getEmail());
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-               @RequiresApi(api = Build.VERSION_CODES.N)
-               @Override
-               public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                   if (task.isSuccessful()) {
-                       DocumentSnapshot document = task.getResult();
-                       if (document.exists()) {
-                           PSMManager.setPSM(document.toObject(PSM.class));
-                           List<String> pLots = PSMManager.getPSM().getParkingLots();
-                           if (pLots != null && pLots.size() > 0) {
-                               DocumentReference docRef;
-                               for (int i = 0; i < pLots.size(); i++) {
-                                   docRef = db.collection("ParkingLotDemo").document(pLots.get(i));
-                                   docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                       @RequiresApi(api = Build.VERSION_CODES.N)
-                                       @Override
-                                       public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                           if (task.isSuccessful()) {
-                                               DocumentSnapshot document = task.getResult();
-                                               if (document.exists()) {
-                                                   parkingLots.add(document.toObject(ParkingLot.class));
-                                                   checkLoadingCounter();
-                                               }
-                                           }
-                                       }
-                                   });
-                               }
-                           } else {
-                               Log.e("TAG", "Couldn't find any documents.");
-                               Toast.makeText(ViewParkingLotsActivity.this, "We couldn't find any parking lots", Toast.LENGTH_SHORT).show();
-                           }
-                       }
-                   }
-               }
-           });
+        if (PSMManager.getPSM() != null) {
+            DocumentReference docRef = db.collection("PSM").document(PSMManager.getPSM().getEmail());
+            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @RequiresApi(api = Build.VERSION_CODES.N)
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            PSMManager.setPSM(document.toObject(PSM.class));
+                            List<String> pLots = PSMManager.getPSM().getParkingLots();
+                            if (pLots != null && pLots.size() > 0) {
+                                DocumentReference docRef;
+                                for (int i = 0; i < pLots.size(); i++) {
+                                    docRef = db.collection("ParkingLotDemo").document(pLots.get(i));
+                                    docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                        @RequiresApi(api = Build.VERSION_CODES.N)
+                                        @Override
+                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                            if (task.isSuccessful()) {
+                                                DocumentSnapshot document = task.getResult();
+                                                if (document.exists()) {
+                                                    parkingLots.add(document.toObject(ParkingLot.class));
+                                                    checkLoadingCounter();
+                                                }
+                                            }
+                                        }
+                                    });
+                                }
+                            } else {
+                                Log.e("TAG", "Couldn't find any documents.");
+                                Toast.makeText(ViewParkingLotsActivity.this, "We couldn't find any parking lots", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                }
+            });
+        }
     }
 
     private void showSpinner() {

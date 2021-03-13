@@ -127,18 +127,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profileEmail" />
 
-    <!--<Button
-        android:id="@+id/parkingHistoryButton"
-        android:layout_width="343dp"
-        android:layout_height="68dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/psm_profile_button_plot"
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="344dp"
+        android:layout_height="67dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/back"
         android:textSize="20sp"
-        app:backgroundTint="#4381DC"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.514"
+        app:backgroundTint="#009688"
+        app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editProfileButton" /> -->
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editProfileButton" />
 
 
 
