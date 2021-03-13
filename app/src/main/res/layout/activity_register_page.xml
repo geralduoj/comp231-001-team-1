@@ -98,7 +98,7 @@
         android:layout_centerInParent="true"
         android:layout_marginTop="12dp"
         android:textSize="20sp"
-        app:backgroundTint="#009688"
+        android:backgroundTint="@android:color/holo_blue_light"
         android:text="@string/register"
         />
 
